@@ -6,6 +6,7 @@ import logging
 from dotenv import load_dotenv
 from datetime import datetime
 from app.detection.detector import person_detector
+from app.tracking.tracker import visitor_tracker
 
 load_dotenv()
 
@@ -27,6 +28,12 @@ async def lifespan(app: FastAPI):
         logger.error("Failed to initialize person detector")
     else:
         logger.info("Person detector initialized successfully")
+    
+    # Initialize visitor tracker
+    if not visitor_tracker.initialize():
+        logger.error("Failed to initialize visitor tracker")
+    else:
+        logger.info("Visitor tracker initialized successfully")
     
     yield
     
@@ -127,6 +134,65 @@ async def detection_status():
         raise HTTPException(
             status_code=500,
             detail=f"Failed to get status: {str(e)}"
+        )
+
+@app.post("/api/tracking/track")
+async def track_video(request: dict):
+    """
+    Run tracking on a video.
+    
+    Request body:
+    {
+        "cameraId": "CAM1",
+        "videoPath": "/path/to/video.mp4",
+        "maxFrames": 100 (optional)
+    }
+    """
+    try:
+        camera_id = request.get("cameraId")
+        video_path = request.get("videoPath")
+        max_frames = request.get("maxFrames")
+        
+        if not camera_id or not video_path:
+            raise HTTPException(
+                status_code=400,
+                detail="cameraId and videoPath are required"
+            )
+        
+        logger.info(f"Starting tracking for {camera_id}: {video_path}")
+        
+        result = visitor_tracker.track_video(
+            video_path=video_path,
+            camera_id=camera_id,
+            max_frames=max_frames
+        )
+        
+        return {
+            "success": True,
+            "data": result
+        }
+    
+    except Exception as e:
+        logger.error(f"Tracking error: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Tracking failed: {str(e)}"
+        )
+
+@app.get("/api/tracking/status")
+async def tracking_status():
+    """Get tracker status"""
+    try:
+        status = visitor_tracker.get_status()
+        return {
+            "success": True,
+            "data": status
+        }
+    except Exception as e:
+        logger.error(f"Tracking status error: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to get tracking status: {str(e)}"
         )
 
 if __name__ == "__main__":

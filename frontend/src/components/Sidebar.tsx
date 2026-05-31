@@ -39,6 +39,12 @@ export default function Sidebar() {
           Detection
         </Link>
         <Link
+          to="/tracking"
+          className="block px-6 py-3 hover:bg-gray-800 transition"
+        >
+          Tracking
+        </Link>
+        <Link
           to="/health"
           className="block px-6 py-3 hover:bg-gray-800 transition"
         >
