@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: store-intelligence-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: store-intelligence
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - store-intelligence-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: store-intelligence-backend
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      MONGODB_URI: mongodb://admin:password@mongodb:27017/store-intelligence?authSource=admin
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key-change-in-production}
+      FRONTEND_URL: http://localhost:5173
+      AI_SERVICE_URL: http://ai-service:8000
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - store-intelligence-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: store-intelligence-ai-service
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: 8000
+      BACKEND_URL: http://backend:3000
+      ENVIRONMENT: production
+    depends_on:
+      - backend
+    networks:
+      - store-intelligence-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: store-intelligence-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:3000/api
+      VITE_SOCKET_URL: http://localhost:3000
+    depends_on:
+      - backend
+    networks:
+      - store-intelligence-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  store-intelligence-network:
+    driver: bridge

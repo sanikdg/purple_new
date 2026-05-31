@@ -1,0 +1,17 @@
+{
+  "description": "Sample data for Store Intelligence System - Phase 1",
+  "version": "1.0.0",
+  "note": "This file is reserved for Phase 2+ when data models are implemented",
+  "collections": {
+    "users": [],
+    "cameras": [],
+    "streams": [],
+    "alerts": [],
+    "analytics": []
+  },
+  "phase1_status": {
+    "health_endpoints": "implemented",
+    "data_models": "not_implemented",
+    "sample_data": "not_required"
+  }
+}
