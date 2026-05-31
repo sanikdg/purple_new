@@ -13,6 +13,8 @@ import cameraRoutes from './routes/camera.js'
 import layoutRoutes from './routes/layout.js'
 import detectionRoutes from './routes/detection.js'
 import trackingRoutes from './routes/tracking.js'
+import eventsRoutes from './routes/events.js'
+import journeysRoutes from './routes/journeys.js'
 import layoutService from './services/layout.service.js'
 
 dotenv.config()
@@ -40,6 +42,8 @@ app.use('/api/cameras', cameraRoutes)
 app.use('/api/store-layout', layoutRoutes)
 app.use('/api/detection', detectionRoutes)
 app.use('/api/tracking', trackingRoutes)
+app.use('/api/events', eventsRoutes)
+app.use('/api/journeys', journeysRoutes)
 
 // Socket.IO connection
 io.on('connection', (socket) => {

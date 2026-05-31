@@ -45,6 +45,18 @@ export default function Sidebar() {
           Tracking
         </Link>
         <Link
+          to="/events"
+          className="block px-6 py-3 hover:bg-gray-800 transition"
+        >
+          Events
+        </Link>
+        <Link
+          to="/journeys"
+          className="block px-6 py-3 hover:bg-gray-800 transition"
+        >
+          Journeys
+        </Link>
+        <Link
           to="/health"
           className="block px-6 py-3 hover:bg-gray-800 transition"
         >

@@ -7,6 +7,8 @@ import CameraPage from './pages/CameraPage'
 import StoreLayoutPage from './pages/StoreLayoutPage'
 import DetectionPage from './pages/DetectionPage'
 import TrackingPage from './pages/TrackingPage'
+import EventsPage from './pages/EventsPage'
+import JourneysPage from './pages/JourneysPage'
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/store-layout" element={<StoreLayoutPage />} />
           <Route path="/detection" element={<DetectionPage />} />
           <Route path="/tracking" element={<TrackingPage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/journeys" element={<JourneysPage />} />
         </Route>
       </Routes>
     </Router>
