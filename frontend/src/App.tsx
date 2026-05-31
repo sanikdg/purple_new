@@ -9,6 +9,7 @@ import DetectionPage from './pages/DetectionPage'
 import TrackingPage from './pages/TrackingPage'
 import EventsPage from './pages/EventsPage'
 import JourneysPage from './pages/JourneysPage'
+import MetricsPage from './pages/MetricsPage'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/tracking" element={<TrackingPage />} />
           <Route path="/events" element={<EventsPage />} />
           <Route path="/journeys" element={<JourneysPage />} />
+          <Route path="/metrics" element={<MetricsPage />} />
         </Route>
       </Routes>
     </Router>

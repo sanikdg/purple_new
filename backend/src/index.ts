@@ -15,6 +15,7 @@ import detectionRoutes from './routes/detection.js'
 import trackingRoutes from './routes/tracking.js'
 import eventsRoutes from './routes/events.js'
 import journeysRoutes from './routes/journeys.js'
+import metricsRoutes from './routes/metrics.js'
 import layoutService from './services/layout.service.js'
 
 dotenv.config()
@@ -44,6 +45,7 @@ app.use('/api/detection', detectionRoutes)
 app.use('/api/tracking', trackingRoutes)
 app.use('/api/events', eventsRoutes)
 app.use('/api/journeys', journeysRoutes)
+app.use('/api/metrics', metricsRoutes)
 
 // Socket.IO connection
 io.on('connection', (socket) => {

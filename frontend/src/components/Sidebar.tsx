@@ -57,6 +57,12 @@ export default function Sidebar() {
           Journeys
         </Link>
         <Link
+          to="/metrics"
+          className="block px-6 py-3 hover:bg-gray-800 transition"
+        >
+          Metrics
+        </Link>
+        <Link
           to="/health"
           className="block px-6 py-3 hover:bg-gray-800 transition"
         >
