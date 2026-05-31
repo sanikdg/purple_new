@@ -15,6 +15,30 @@ export default function Sidebar() {
           Dashboard
         </Link>
         <Link
+          to="/datasets"
+          className="block px-6 py-3 hover:bg-gray-800 transition"
+        >
+          Datasets
+        </Link>
+        <Link
+          to="/cameras"
+          className="block px-6 py-3 hover:bg-gray-800 transition"
+        >
+          Cameras
+        </Link>
+        <Link
+          to="/store-layout"
+          className="block px-6 py-3 hover:bg-gray-800 transition"
+        >
+          Store Layout
+        </Link>
+        <Link
+          to="/detection"
+          className="block px-6 py-3 hover:bg-gray-800 transition"
+        >
+          Detection
+        </Link>
+        <Link
           to="/health"
           className="block px-6 py-3 hover:bg-gray-800 transition"
         >

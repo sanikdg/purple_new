@@ -3,3 +3,8 @@ uvicorn==0.24.0
 pydantic==2.5.0
 python-dotenv==1.0.0
 httpx==0.25.1
+opencv-python==4.8.1.78
+ultralytics==8.0.228
+torch==2.1.1
+torchvision==0.16.1
+numpy==1.24.3

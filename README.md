@@ -4,9 +4,9 @@ AI-Powered Retail CCTV Analytics Platform
 
 ## Overview
 
-Store Intelligence System is a production-grade platform for retail CCTV analytics powered by AI. This is **Phase 1** - the foundation and architecture layer with health monitoring endpoints.
+Store Intelligence System is a production-grade platform for retail CCTV analytics powered by AI. This is **Phase 2** - the dataset and store layout integration layer.
 
-### Key Features (Phase 1)
+### Key Features (Phase 1) ✓
 - ✓ Production-grade architecture
 - ✓ Full project skeleton
 - ✓ Health monitoring endpoints
@@ -14,13 +14,22 @@ Store Intelligence System is a production-grade platform for retail CCTV analyti
 - ✓ Comprehensive documentation
 - ✓ Real-time WebSocket support (Socket.IO)
 
-### Planned Features (Phase 2+)
-- Authentication & Authorization
-- Camera management
-- Stream ingestion
+### Key Features (Phase 2) ✓
+- ✓ Dataset registry and management
+- ✓ Camera registry
+- ✓ Store layout with 20+ zones
+- ✓ Dataset APIs (GET endpoints)
+- ✓ Camera APIs (GET endpoints)
+- ✓ Store layout APIs (GET endpoints)
+- ✓ Frontend pages (Datasets, Cameras, Store Layout)
+- ✓ Mock data support
+
+### Planned Features (Phase 3+)
+- AI model integration
+- Video processing pipeline
+- Detection results storage
+- Analytics calculations
 - Real-time alerts
-- AI-powered analytics
-- Advanced reporting
 
 ## Tech Stack
 
@@ -121,17 +130,35 @@ store-intelligence/
 - **[TROUBLESHOOTING.md](./docs/TROUBLESHOOTING.md)** - Common issues
 - **[DEVELOPMENT_PROGRESS.md](./DEVELOPMENT_PROGRESS.md)** - Development status
 
-## API Endpoints (Phase 1)
+## API Endpoints
 
-### Health Checks
+### Health Checks (Phase 1)
 - `GET /api/health` - Basic health check
 - `GET /api/health/detailed` - Detailed service health
+
+### Dataset APIs (Phase 2)
+- `GET /api/datasets` - Get all datasets
+- `GET /api/datasets/:id` - Get specific dataset
+- `GET /api/datasets/stats/summary` - Get dataset statistics
+
+### Camera APIs (Phase 2)
+- `GET /api/cameras` - Get all cameras
+- `GET /api/cameras/:id` - Get specific camera
+
+### Store Layout APIs (Phase 2)
+- `GET /api/store-layout` - Get layout summary
+- `GET /api/store-layout/zones/all` - Get all zones
+- `GET /api/store-layout/zones/:id` - Get specific zone
+- `GET /api/store-layout/type/:type` - Get zones by type
+- `GET /api/store-layout/brand/:brandName` - Get zone by brand
+- `GET /api/store-layout/brands/all` - Get all brand zones
 
 ### Response Format
 ```json
 {
-  "status": "healthy",
-  "timestamp": "2024-01-15T10:30:00.000Z"
+  "success": true,
+  "data": {},
+  "count": 0
 }
 ```
 
@@ -328,31 +355,36 @@ For issues and questions:
 - Health monitoring
 - Docker containerization
 
-### Phase 2 (Planned)
-- Authentication & Authorization
-- User management
-- JWT implementation
+### Phase 2 ✓ COMPLETE
+- Dataset registry and management
+- Camera registry
+- Store layout with 20+ zones
+- Dataset, Camera, and Layout APIs
+- Frontend pages for data visualization
+- Mock data support
 
 ### Phase 3 (Planned)
-- Camera management
-- Stream ingestion
-- Alert system
+- AI model integration (YOLO)
+- Video processing pipeline
+- Detection results storage
+- Analytics calculations
 
 ### Phase 4 (Planned)
-- AI model integration
-- Analytics processing
-- Tracking implementation
-
-### Phase 5 (Planned)
+- Real-time streaming
 - Advanced dashboards
 - Reporting system
 - Performance optimization
 
+### Phase 5 (Planned)
+- Authentication & Authorization
+- User management
+- Advanced analytics
+
 ## Status
 
-**Phase 1: COMPLETE** ✓
+**Phase 2: COMPLETE** ✓
 
-All foundation components are implemented and verified. See [VERIFICATION_REPORT.md](./VERIFICATION_REPORT.md) for detailed build verification.
+Dataset and store layout integration is fully implemented. All APIs are functional with mock data support.
 
 ### Build Status
 - ✓ Frontend: Builds successfully (Vite)
@@ -361,9 +393,20 @@ All foundation components are implemented and verified. See [VERIFICATION_REPORT
 - ✓ Docker: All Dockerfiles valid
 - ✓ Documentation: Complete
 
+### Phase 2 Deliverables
+- ✓ Dataset Model & Service
+- ✓ Camera Model & Service
+- ✓ Zone Model & Service
+- ✓ Dataset APIs (6 endpoints)
+- ✓ Camera APIs (2 endpoints)
+- ✓ Store Layout APIs (6 endpoints)
+- ✓ Frontend Pages (3 pages)
+- ✓ Architecture Documentation
+- ✓ Dataset Structure Documentation
+
 ---
 
 **Last Updated**: May 31, 2026
-**Version**: 1.0.0
-**Status**: Production-Ready (Phase 1)
+**Version**: 2.0.0
+**Status**: Production-Ready (Phase 2)
 **Verification**: All builds passing

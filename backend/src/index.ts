@@ -8,6 +8,11 @@ import dotenv from 'dotenv'
 import { connectDatabase } from './config/database.js'
 import { errorHandler } from './middleware/errorHandler.js'
 import healthRoutes from './routes/health.js'
+import datasetRoutes from './routes/dataset.js'
+import cameraRoutes from './routes/camera.js'
+import layoutRoutes from './routes/layout.js'
+import detectionRoutes from './routes/detection.js'
+import layoutService from './services/layout.service.js'
 
 dotenv.config()
 
@@ -29,6 +34,10 @@ app.use(express.urlencoded({ extended: true }))
 
 // Routes
 app.use('/api/health', healthRoutes)
+app.use('/api/datasets', datasetRoutes)
+app.use('/api/cameras', cameraRoutes)
+app.use('/api/store-layout', layoutRoutes)
+app.use('/api/detection', detectionRoutes)
 
 // Socket.IO connection
 io.on('connection', (socket) => {
@@ -47,6 +56,11 @@ const PORT = process.env.PORT || 3000
 const startServer = async () => {
   try {
     await connectDatabase()
+    
+    // Initialize store layout
+    await layoutService.initializeLayout()
+    console.log('Store layout initialized')
+    
     httpServer.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`)
       console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
